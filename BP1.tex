@@ -1,0 +1,226 @@
+\documentclass[11pt,a4paper]{article}
+
+% Compileer met pdfLaTeX. Installeer in MiKTeX zo nodig tcolorbox.
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{xcolor}
+\usepackage[breakable]{tcolorbox}
+
+\definecolor{studieblauw}{HTML}{2563A6}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+\setlength{\textwidth}{160mm}
+\setlength{\oddsidemargin}{0mm}
+\setlength{\evensidemargin}{0mm}
+
+% Per begrip: korte betekenis, gevolgd door punten die je moet kennen.
+\newtcolorbox{definition}[1]{
+  title=\textbf{#1},
+  colback=studieblauw!4,
+  colframe=studieblauw,
+  boxrule=0.7pt,
+  arc=1.5mm,
+  breakable,
+  before skip=9pt,
+  after skip=9pt
+}
+
+\newcommand{\kennen}{\par\smallskip\textbf{Kennen:}}
+
+\title{Business Processes\\Introductie -- begrippenlijst}
+\author{Dries Van den Brande}
+\date{}
+
+\begin{document}
+\maketitle
+
+\noindent\textit{Studielijst bij ``0. BP Intro''. Leer de betekenis en de
+verschillen tussen begrippen; probeer de vragen onderaan zonder de lijst te
+beantwoorden.}
+
+\section{Bedrijfsprocessen en IT}
+
+\begin{definition}{Bedrijfsproces}
+Een reeks samenhangende activiteiten, gericht op een klant en afgestemd op de
+organisatiedoelen.
+\kennen
+\begin{itemize}
+  \item Herken een proces als een samenhang van activiteiten, niet als een losse taak.
+  \item Benoem wie de klant is en welke waarde het proces voor die klant oplevert.
+  \item Leg bij een toepassing uit welk bedrijfsproces ze ondersteunt.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{IT in een bedrijfsproces}
+Applicaties ondersteunen bedrijfsprocessen. IT kan ook zelf deel uitmaken van
+het aangeboden product of de dienst.
+\kennen
+\begin{itemize}
+  \item Kijk verder dan de code: wie gebruikt de toepassing en voor welk werk?
+  \item Herken beide rollen van IT in een concreet voorbeeld.
+\end{itemize}
+\end{definition}
+
+\section{Drie types bedrijfsprocessen}
+
+\begin{definition}{Primair bedrijfsproces}
+Een operationeel proces dat rechtstreeks verband houdt met het doel van de
+organisatie en rechtstreeks waarde cre\"eert voor de externe klant.
+\kennen
+\begin{itemize}
+  \item Bepaal wat de organisatie aan haar klanten levert.
+  \item Herken de primaire activiteit in een concreet bedrijf.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Besturend bedrijfsproces}
+Een proces dat de strategie en koers van de organisatie bepaalt (richten) en de
+organisatie op haar doelen afstemt (inrichten).
+\kennen
+\begin{itemize}
+  \item Onderscheid \textbf{richten} van \textbf{inrichten}.
+  \item Leg uit waarom managementactiviteiten besturend kunnen zijn.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Ondersteunend bedrijfsproces}
+Een proces dat het algemene functioneren van de organisatie mogelijk maakt.
+\kennen
+\begin{itemize}
+  \item Herken voorbeelden zoals beveiliging, catering, HR, ICT en finance.
+  \item Bepaal wie binnen de organisatie de ondersteuning gebruikt.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Externe klant}
+Een klant buiten de organisatie die waarde uit haar aanbod ontvangt.
+\kennen
+\begin{itemize}
+  \item Herken de externe klant van het primaire proces.
+  \item Voorbeeld: de klant die een mobiele app laat ontwikkelen.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Interne klant}
+Een medewerker of afdeling binnen de organisatie die een proces gebruikt om
+het eigen werk mogelijk te maken.
+\kennen
+\begin{itemize}
+  \item Herken interne klanten van besturende en ondersteunende processen.
+  \item Voorbeeld: collega's die HR- of ICT-ondersteuning nodig hebben.
+\end{itemize}
+\end{definition}
+
+\section{Soorten organisaties en waardecreatie}
+
+\begin{definition}{Productgerichte organisatie}
+Een organisatie die fysieke of digitale producten maakt, verhandelt of
+verdeelt.
+\kennen
+\begin{itemize}
+  \item Onderscheid productie, handel en distributie.
+  \item Bepaal per soort wat de primaire activiteit is.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Productiebedrijf}
+Een organisatie die producten vervaardigt. Productie is daarbij een primair
+proces; waarde ontstaat door transformatie.
+\kennen
+\begin{itemize}
+  \item Voorbeeld: een producent die tomaten tot tomatensaus verwerkt.
+  \item Leg uit wat er door het productieproces verandert.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Handelsbedrijf}
+Een organisatie die producten aankoopt en verkoopt.
+\kennen
+\begin{itemize}
+  \item Herken aankoop, opslag en verkoop als primaire processen.
+  \item Leg uit hoe bewaren, verzamelen en distribueren waarde toevoegen.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Distributiebedrijf}
+Een organisatie die producten verdeelt of vervoert binnen de keten van
+producent tot consument.
+\kennen
+\begin{itemize}
+  \item Herken het verschil tussen een product maken, verhandelen en vervoeren.
+  \item Voorbeeld uit de slides: een voedseltransportbedrijf.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Bedrijfskolom}
+Het geheel van organisaties dat producten van grondstof tot consument brengt.
+\kennen
+\begin{itemize}
+  \item Zet de schakels van een eenvoudig product in de juiste volgorde.
+  \item Gebruik de voorbeelden gepelde garnalen en katoenen T-shirt om de keten te oefenen.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Dienstverlenende organisatie}
+Een organisatie die een dienst, expertise of ervaring aan klanten levert.
+\kennen
+\begin{itemize}
+  \item Onderscheid het leveren van een dienst van het leveren van een product.
+  \item Herken dienstverlening aan organisaties (B2B) en consumenten (B2C).
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Kenmerken van een dienst}
+Een dienst is niet tastbaar, vergankelijk, interactief en heterogeen.
+\kennen
+\begin{itemize}
+  \item \textbf{Niet tastbaar:} je kunt de dienst niet vastpakken; na de ervaring is ze voorbij.
+  \item \textbf{Vergankelijk:} je kunt een dienst niet bewaren.
+  \item \textbf{Interactief:} aanbieder en klant werken samen.
+  \item \textbf{Heterogeen:} de situatie verschilt van keer tot keer.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Overheid en semi-publieke organisaties}
+Organisaties die waarde leveren zonder winstoogmerk als centraal doel.
+\kennen
+\begin{itemize}
+  \item Herken de voorbeelden uit de slides: gemeenten, Vlaamse en federale overheid,
+        ziekenhuizen, vzw's en ngo's.
+  \item Bedenk wie de ontvanger van hun waarde is.
+\end{itemize}
+\end{definition}
+
+\section{Evolutie: van bezit naar toegang}
+
+\begin{definition}{As a service}
+Een model waarbij een product steeds vaker als dienst wordt aangeboden: de
+klant krijgt toegang of gebruik in plaats van alleen bezit.
+\kennen
+\begin{itemize}
+  \item Herken een product dat je vandaag als dienst gebruikt.
+  \item Geef de redenen uit de slides voor deze verschuiving:
+        wederkerende inkomsten, milieuvriendelijker, een beheersbare uitgave
+        voor de klant en gemakkelijker te distribueren.
+  \item Benoem welk bedrijfsproces achter het gekozen voorbeeld zit.
+\end{itemize}
+\end{definition}
+
+\section{Toepassen zonder spiekbrief}
+
+\begin{enumerate}
+  \item Wat maakt een reeks activiteiten tot een bedrijfsproces?
+  \item Wat is het verschil tussen primair, besturend en ondersteunend?
+  \item Een IT-agency ontwikkelt mobiele apps en heeft developers, management,
+        HR, sales en finance. Welke activiteiten horen bij welk procestype?
+  \item Wie is de externe klant van die IT-agency? Noem ook twee interne klanten.
+  \item Wat is een bedrijfskolom? Teken er een voor een katoenen T-shirt.
+  \item Welk verschil zie je tussen de waardecreatie van een productiebedrijf en
+        een handelsbedrijf?
+  \item Noem de vier kenmerken van een dienst en illustreer er twee.
+  \item Welk product gebruik jij ``as a service'', en welk proces maakt dat
+        aanbod mogelijk?
+\end{enumerate}
+
+\end{document}
