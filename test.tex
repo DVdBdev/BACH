@@ -1,0 +1,554 @@
+\documentclass[11pt,a4paper]{article}
+
+% =========================================================
+% Packages
+% =========================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[a4paper,margin=2.2cm]{geometry}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+% =========================================================
+% Style
+% =========================================================
+\definecolor{studyblue}{HTML}{2563EB}
+\definecolor{studygray}{HTML}{F3F4F6}
+
+\setlength{\parindent}{0pt}
+\setlist[itemize]{leftmargin=1.4em, itemsep=2pt, topsep=4pt}
+
+\newtcolorbox{definition}[1]{
+    breakable,
+    title=\textbf{#1},
+    colback=studyblue!4,
+    colframe=studyblue!65!black,
+    boxrule=0.8pt,
+    arc=2mm,
+    left=3mm,
+    right=3mm,
+    top=2mm,
+    bottom=2mm,
+    before skip=8pt,
+    after skip=8pt
+}
+
+\newtcolorbox{studylist}[1]{
+    breakable,
+    title=\textbf{#1},
+    colback=studygray,
+    colframe=black!40,
+    boxrule=0.6pt,
+    arc=2mm,
+    left=3mm,
+    right=3mm,
+    top=2mm,
+    bottom=2mm,
+    before skip=8pt,
+    after skip=8pt
+}
+
+% =========================================================
+% Document
+% =========================================================
+\title{Software Design -- Klassediagram}
+\author{Dries Van den Brande}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Klassediagram}
+
+% =========================================================
+\subsection{Basisconcepten}
+% =========================================================
+
+\begin{definition}{Klasse}
+Een verzameling van objecten met overeenkomstige eigenschappen.
+
+\textbf{Kennen:}
+\begin{itemize}
+    \item Een klassebeschrijving bevat de naam van de klasse en haar eigenschappen.
+    \item Klassen worden door de modelleur bepaald, bijvoorbeeld via classificatie.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Object / instantie}
+Een object heeft een zelfstandig bestaan, in werkelijkheid of conceptueel.
+
+\textbf{Kennen:}
+\begin{itemize}
+    \item \textbf{Identiteit}: elk object is uniek.
+    \item \textbf{Toestand}: de data van het object.
+    \item \textbf{Gedrag}: de operaties van het object.
+    \item \textbf{Encapsulation}: interne details worden verborgen.
+    \item \textbf{Abstraction}: het object wordt via zijn interface benaderd.
+    \item \textbf{Instantie} is een andere naam voor object, vooral wanneer men wil aangeven tot welke klasse het object behoort.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Attribuut}
+Informatie die door een object beheerd wordt.
+
+\textbf{Kennen:}
+\begin{itemize}
+    \item De waarden van alle attributen samen vormen de toestand van een object.
+    \item Twee objecten kunnen dezelfde toestand hebben en toch verschillende objecten zijn, omdat elk object een eigen identiteit heeft.
+    \item Een attribuut heeft een bepaald type.
+    \item Voorbeelden bij een persoon: naam, geboortedatum en gewicht.
+    \item In UML kan een attribuut een multipliciteit hebben.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Operatie}
+Een operatie beschrijft een service die door een object geleverd wordt.
+
+\textbf{Kennen:}
+\begin{itemize}
+    \item Een operatie moet behoren tot de verantwoordelijkheden van het object.
+    \item De verzameling operaties vormt het gedrag van het object.
+    \item Een operatie kan argumenten hebben.
+    \item Een operatie kan een resultaat opleveren.
+    \item Objecten communiceren door boodschappen te sturen tussen zender en ontvanger.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Associatie}
+Een structurele relatie tussen twee klassen.
+
+\textbf{Kennen:}
+\begin{itemize}
+    \item Een instantie van de ene klasse is gedurende een groot deel van haar bestaan verbonden met een instantie van de andere klasse.
+    \item Tussen twee klassen kunnen meerdere associaties bestaan.
+    \item De naam van de associatie staat langs de associatielijn.
+    \item De leesrichting kan aangeduid worden.
+    \item Een \textbf{link} is een instantie van een associatie.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Rol}
+De rol beschrijft een associatie-einde.
+
+\textbf{Kennen:}
+\begin{itemize}
+    \item Een object kan in verschillende associaties verschillende rollen spelen.
+    \item Wanneer de rolnaam wordt weggelaten, geldt de klassenaam als rolnaam.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Multipliciteit}
+Geeft aan hoeveel instanties aan een associatie-einde of attribuut kunnen voorkomen.
+
+\textbf{Kennen:}
+\begin{itemize}
+    \item Multipliciteit kan met symbolen of expliciete cijfers worden weergegeven.
+    \item Multipliciteit kan aan beide uiteinden van een associatie staan.
+    \item Bij een attribuut wordt de multipliciteit tussen vierkante haken geplaatst.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Generalisatie}
+Het classificeren van klassen volgens een \textbf{IS-A}-relatie.
+
+\textbf{Kennen:}
+\begin{itemize}
+    \item Zoek klassen met gemeenschappelijke kenmerken.
+    \item \textbf{Superklasse} = generalisatie = basisklasse.
+    \item \textbf{Subklasse} = specialisatie = afgeleide klasse.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Overerving}
+Iedere subklasse erft de eigenschappen van haar superklasse.
+
+\textbf{Kennen:}
+\begin{itemize}
+    \item Attributen en operaties van de superklasse worden geërfd.
+    \item Overerving volgt de IS-A-relatie.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Liskov's substitutieprincipe}
+Op iedere plaats waar een instantie van een klasse gebruikt kan worden, kan een instantie van een subklasse gebruikt worden.
+
+\textbf{Kennen:}
+\begin{itemize}
+    \item Het principe hoort bij de IS-A-relatie.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Commentaar}
+Extra uitleg in een UML-diagram.
+
+\textbf{Kennen:}
+\begin{itemize}
+    \item Commentaar kan in een notebox geplaatst worden.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Klassediagram}
+Een diagram dat de klassen in een systeem toont.
+
+\textbf{Kennen:}
+\begin{itemize}
+    \item Bevat klassen.
+    \item Kan attributen bevatten.
+    \item Kan operaties bevatten.
+    \item Kan associaties bevatten.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Objectdiagram}
+Een afbeelding van objecten op een bepaald tijdstip.
+
+\textbf{Kennen:}
+\begin{itemize}
+    \item De objecten zijn gecreëerd volgens de structuur van het klassediagram.
+    \item Een objectdiagram toont instanties van het klassediagram.
+\end{itemize}
+\end{definition}
+
+% =========================================================
+\subsection{Geavanceerde concepten}
+% =========================================================
+
+\begin{definition}{Afgeleid attribuut}
+Een attribuut waarvan de waarde afgeleid wordt uit andere informatie.
+
+\textbf{Kennen:}
+\begin{itemize}
+    \item De waarde kan afgeleid worden uit andere attributen, associaties of objecten.
+    \item De waarde hoeft niet noodzakelijk opgeslagen te worden.
+    \item Het is informatie waar een object om gevraagd kan worden.
+    \item Voorbeeld: \texttt{/leeftijd}.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Zichtbaarheid}
+Geeft aan in hoeverre een attribuut of operatie door de omgeving van een object gekend is.
+
+\textbf{Kennen:}
+\begin{itemize}
+    \item \texttt{-} = private
+    \item \texttt{+} = public
+    \item \texttt{\#} = protected
+    \item \texttt{\textasciitilde} = package
+    \item Inkapseling probeert zoveel mogelijk interne informatie te verbergen.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Bag}
+Een meervoudige verzameling waarbij volgorde niet belangrijk is en dubbele waarden toegelaten zijn.
+\end{definition}
+
+\begin{definition}{Sequence}
+Een meervoudige verzameling met een vaste volgorde waarin dubbele waarden toegelaten zijn.
+\end{definition}
+
+\begin{definition}{Set}
+Een meervoudige verzameling zonder vaste volgorde waarin iedere waarde uniek is.
+\end{definition}
+
+\begin{definition}{OrderedSet}
+Een meervoudige verzameling met een vaste volgorde waarin iedere waarde uniek is.
+\end{definition}
+
+\begin{definition}{Klasseattribuut}
+Een attribuut dat een eigenschap van de klasse beschrijft en niet van iedere individuele instantie.
+
+\textbf{Kennen:}
+\begin{itemize}
+    \item Heeft slechts één waarde, onafhankelijk van het aantal instanties van de klasse.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Klasseoperatie}
+Een service die door de klasse zelf geleverd wordt en niet door een individuele instantie.
+
+\textbf{Kennen:}
+\begin{itemize}
+    \item Een constructor is een voorbeeld dat in de slides bij klasseoperaties wordt vermeld.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Afgeleide associatie}
+Een associatie die uit andere informatie kan worden afgeleid.
+
+\textbf{Kennen:}
+\begin{itemize}
+    \item Is redundant.
+    \item Moet spaarzaam gebruikt worden.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Richting van een associatie}
+Geeft aan welke klasse de andere klasse kent.
+
+\textbf{Kennen:}
+\begin{itemize}
+    \item Een gewone associatie impliceert in principe dat de objecten aan beide uiteinden elkaar kennen.
+    \item Een richting kan aangeduid worden om deze navigatie te beperken.
+    \item Dit kan consistentieproblemen helpen vermijden.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Associatieklasse}
+Een klasse die gekoppeld is aan een associatie.
+
+\textbf{Kennen:}
+\begin{itemize}
+    \item De link tussen twee instanties is een instantie van de associatieklasse.
+    \item Wordt gebruikt wanneer de associatie zelf attributen heeft.
+    \item Wordt gebruikt wanneer de associatie zelf operaties heeft.
+    \item Wordt gebruikt wanneer de associatie associaties met andere klassen heeft.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Compositie}
+Een speciaal soort associatie waarbij één of meer klassen onderdeel zijn van een andere klasse.
+
+\textbf{Kennen:}
+\begin{itemize}
+    \item Een onderdeel mag in een compositierelatie slechts tot één geheel behoren.
+    \item De levensduur van het deelobject is kleiner dan of gelijk aan de levensduur van het gehele object.
+    \item Er is een \textbf{lifetime dependency}.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Abstracte klasse}
+Een klasse waarvan geen instanties kunnen bestaan.
+
+\textbf{Kennen:}
+\begin{itemize}
+    \item Is superklasse van andere klassen.
+    \item Dient om een gezamenlijke interface te definiëren.
+    \item Concrete subklassen kunnen wel instanties hebben.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Abstracte operatie}
+Een operatie die in een abstracte klasse gedeclareerd wordt maar daar niet volledig gedefinieerd hoeft te zijn.
+\end{definition}
+
+\begin{definition}{Meervoudige overerving}
+Een situatie waarbij een klasse meer dan één superklasse heeft.
+\end{definition}
+
+\begin{definition}{Herhaalde overerving}
+Een vorm van overerving die kan ontstaan binnen een hiërarchie met meerdere overervingspaden.
+
+\textbf{Kennen:}
+\begin{itemize}
+    \item De slides vermelden dat meervoudige en herhaalde overerving niet in moderne programmeertalen gebruikt worden.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Enumeratie}
+Een type waarvoor een vast aantal mogelijke waarden gedefinieerd is.
+\end{definition}
+
+\begin{definition}{Package}
+Een groepering van modelelementen.
+
+\textbf{Kennen:}
+\begin{itemize}
+    \item Is een generiek mechanisme om een softwaresysteem op te delen.
+    \item Ieder modelelement behoort tot één package.
+    \item Associaties kunnen voorkomen tussen klassen uit verschillende packages.
+    \item Een package is een verzameling klassen die samenwerken om aan een bepaalde verantwoordelijkheid te voldoen.
+    \item Packages kunnen genest zijn.
+    \item Een klasse uit een andere package kan met de notatie \texttt{PACKAGE::Klasse} aangeduid worden.
+    \item Sinds UML 2 bestaat ook \textit{package merge}.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Geparametriseerde klasse / template}
+Een klasse waarvan bepaalde zaken afhankelijk zijn van één of meer parameters.
+
+\textbf{Kennen:}
+\begin{itemize}
+    \item Door waarden aan de parameters te geven ontstaat een klasse waarvan instanties gemaakt kunnen worden.
+    \item Een template beschrijft een familie van klassen.
+    \item Wanneer een parameter een type aanduidt, kan aangegeven worden aan welk ander type dat type moet voldoen.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Constraint}
+Een beperking op één of meer elementen in een klassediagram.
+
+\textbf{Kennen:}
+\begin{itemize}
+    \item Constraints kunnen met OCL uitgedrukt worden.
+    \item Voorbeelden uit de slides zijn leeftijdsvoorwaarden en XOR-constraints.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{OCL}
+Object Constraint Language.
+
+\textbf{Kennen:}
+\begin{itemize}
+    \item Wordt gebruikt om bedrijfsregels en beperkingen bij een model uit te drukken.
+    \item Een invariant kan in de vorm \texttt{context ... inv: ...} geschreven worden.
+\end{itemize}
+\end{definition}
+
+% =========================================================
+\subsection{Werkwijze voor een klassediagram}
+% =========================================================
+
+\begin{studylist}{Stappenplan}
+\begin{enumerate}
+    \item Identificeer alle mogelijke kandidaatklassen.
+    \item Selecteer de klassen uit de lijst van kandidaten.
+    \item Maak eventueel een modeldictionary.
+    \item Identificeer associaties.
+    \item Identificeer attributen.
+    \item Identificeer operaties.
+    \item Generaliseer met behulp van overerving.
+    \item Voeg eventueel OCL-constraints toe.
+    \item Groepeer eventueel in packages.
+    \item Itereer over de gedane stappen.
+\end{enumerate}
+\end{studylist}
+
+\begin{definition}{Kandidaatklasse identificeren}
+Zoek zonder beperkingen zoveel mogelijk mogelijke klassen.
+
+\textbf{Kennen:}
+\begin{itemize}
+    \item Methode 1: onderstreep zelfstandige naamwoorden in de tekst.
+    \item Methode 2: organiseer een brainstormsessie.
+    \item Betrek toekomstige gebruikers, domeinexperts en ontwikkelaars.
+    \item Tijdens deze stap: geen kritiek.
+    \item Niet iedere term wordt uiteindelijk een klasse; termen kunnen wel in de modeldictionary terechtkomen.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Klassen selecteren}
+Bepaal welke kandidaatklassen effectief in het model opgenomen worden.
+
+\textbf{Vragen:}
+\begin{itemize}
+    \item Heeft de kandidaat een zelfstandige rol in het probleemdomein?
+    \item Willen we iets van deze kandidaat weten?
+    \item Moet de kandidaat iets doen?
+    \item Heeft de kandidaat een duidelijke verantwoordelijkheid in het systeem?
+\end{itemize}
+
+\textbf{Mogelijke redenen om geen klasse te maken:}
+\begin{itemize}
+    \item Redundant.
+    \item Irrelevant voor het probleemdomein.
+    \item Te vaag.
+    \item Niet kwantificeerbaar.
+    \item Is eigenlijk een attribuut.
+    \item Is eigenlijk een operatie.
+    \item Is eigenlijk een rol.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Modeldictionary}
+Een verzameling waarin de termen van het model worden opgenomen.
+
+\textbf{Kennen:}
+\begin{itemize}
+    \item Kan klassen, attributen, operaties en andere termen bevatten.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Associaties identificeren}
+Zoek relaties tussen paren van klassen.
+
+\textbf{Kennen:}
+\begin{itemize}
+    \item Zoek kandidaatassociaties.
+    \item Elimineer tijdelijke acties of relaties die eerder dependencies zijn.
+    \item Controleer of afgeleide associaties echt nodig zijn.
+    \item Koppel terug naar gebruikers en domeinexperts.
+    \item Voeg rollen en multipliciteiten toe.
+    \item Verwijder irrelevante associaties.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Attributen identificeren}
+Breid de klassen uit met relevante informatie die door hun objecten beheerd wordt.
+
+\textbf{Vragen:}
+\begin{itemize}
+    \item Wat zijn de dingen waar een object van weet?
+    \item Welke informatie kunnen we aan het object vragen?
+\end{itemize}
+
+\textbf{Opletten voor:}
+\begin{itemize}
+    \item Een attribuut kan geen objectreferentie vervangen; daarvoor gebruik je een associatie.
+    \item Identifiers zijn vaak kunstmatige attributen.
+    \item Neem alleen interne waarden op die voor de klant relevant zijn.
+    \item Vermijd te veel detail.
+    \item Denk ook aan klasseattributen.
+    \item Voeg multipliciteit toe.
+    \item Typen worden volgens de slides later in het ontwerp toegevoegd.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Operaties identificeren}
+Bepaal welk gedrag bij de verantwoordelijkheid van een klasse hoort.
+
+\textbf{Vragen:}
+\begin{itemize}
+    \item Wat wil ik dat het object voor mij doet?
+    \item Wat is de verantwoordelijkheid van het object?
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Generaliseren met overerving}
+Bekijk of bestaande klassen gemeenschappelijke eigenschappen hebben die in een nieuwe superklasse geplaatst kunnen worden.
+
+\textbf{Kennen:}
+\begin{itemize}
+    \item Zoek identieke attributen, operaties en associaties.
+    \item Controleer of ze ook werkelijk dezelfde betekenis hebben.
+    \item Generaliseren is een vorm van abstraheren.
+    \item De slides waarschuwen dat te veel generalisatie de flexibiliteit kan verminderen.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Bedrijfsregels toevoegen}
+Druk business rules en beperkingen uit met constraints, bijvoorbeeld in OCL.
+
+\textbf{Kennen:}
+\begin{itemize}
+    \item Formuleer vragen binnen het probleemdomein.
+    \item Wanneer belangrijke vragen niet met het model beantwoord kunnen worden, kan het model te beperkt zijn.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Klassen groeperen in packages}
+Deel een groot klassediagram logisch of praktisch op in packages.
+
+\textbf{Kennen:}
+\begin{itemize}
+    \item Binnen UML is de gekozen verdeling vrij.
+\end{itemize}
+\end{definition}
+
+\begin{definition}{Itereren}
+Het maken van een klassediagram is geen strikt sequentieel proces.
+
+\textbf{Kennen:}
+\begin{itemize}
+    \item Controleer op inconsistenties en onvolledigheid.
+    \item Een verantwoordelijkheid of operatie zonder geschikte klasse kan wijzen op een ontbrekend modelelement.
+    \item Een constraint die niet beschreven kan worden met het bestaande model kan wijzen op een ontbrekende associatie, klasse, attribuut of operatie.
+    \item Pas het diagram aan en doorloop eerdere stappen opnieuw.
+\end{itemize}
+\end{definition}
+
+\end{document}
