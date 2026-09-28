@@ -1,0 +1,69 @@
+% Packages, document-wide settings, and dependency order.
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{textcomp}
+\usepackage{lmodern}
+\usepackage[a4paper,margin=27mm,headheight=15pt,headsep=8mm,footskip=12mm]{geometry}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{xparse}
+\usepackage{xstring}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable,skins}
+\usepackage{listings}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+\input{style.tex}
+\input{macros.tex}
+
+% Compact but comfortable lists; local options remain available when needed.
+\setlist{itemsep=0.25\baselineskip,topsep=0.35\baselineskip,parsep=0pt}
+\setlist[enumerate]{label=\arabic*.,leftmargin=*}
+\setlist[itemize]{label=\textcolor{PrimaryColor}{\small\textbullet},leftmargin=*}
+
+% Better default spacing and alignment for ordinary tables.
+\renewcommand{\arraystretch}{1.18}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+% Hyperref is loaded after packages that define document structure.
+\hypersetup{
+  colorlinks=true,
+  linkcolor=PrimaryColor,
+  urlcolor=PrimaryColor,
+  citecolor=PrimaryColor,
+  pdfauthor={},
+  pdftitle={Study Notes}
+}
+\AtBeginDocument{%
+  \hypersetup{
+    pdftitle={\StudySubject\space -- Study Notes},
+    pdfauthor={\StudyAuthor},
+    pdfsubject={\StudySubject\space study notes}
+  }%
+}
+
+% Minimal running heads. Chapter-opening pages use a quieter footer-only style.
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\color{TextMuted}\StudySubject}
+\fancyhead[R]{\small\color{TextMuted}\nouppercase{\rightmark}}
+\fancyfoot[L]{\small\color{TextMuted}\StudyAuthor}
+\fancyfoot[R]{\small\color{TextMuted}\thepage}
+\renewcommand{\headrulewidth}{0.35pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancypagestyle{plain}{%
+  \fancyhf{}
+  \fancyfoot[L]{\small\color{TextMuted}\StudyAuthor}
+  \fancyfoot[R]{\small\color{TextMuted}\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}

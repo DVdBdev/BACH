@@ -1,0 +1,17 @@
+  % Assemble the reusable study-note template and one selected subject.
+\documentclass[11pt,a4paper,oneside,openany]{report}
+
+\input{preamble.tex}
+
+% Select a subject by changing this one file and the chapter inputs below.
+\input{subjects/business-processes/subject.tex}
+
+\begin{document}
+\makestudytitlepage
+\tableofcontents
+\cleardoublepage
+
+\input{subjects/business-processes/chapter-01.tex}
+\input{subjects/business-processes/chapter-02.tex}
+
+\end{document}

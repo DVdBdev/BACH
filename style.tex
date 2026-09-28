@@ -1,0 +1,122 @@
+% Central style sheet: change these few values to restyle the whole project.
+\definecolor{PrimaryColor}{HTML}{36566F}
+\definecolor{LightBackground}{HTML}{F3F6F8}
+\definecolor{ConceptBackground}{HTML}{F5F6F3}
+\definecolor{ExamBackground}{HTML}{F7F4EF}
+\definecolor{TextMuted}{HTML}{68737D}
+\definecolor{RuleColor}{HTML}{D5DDE2}
+
+% Normal sectioning remains available, with modest sizes matching the template.
+\titleformat{\section}
+  {\Large\bfseries\color{PrimaryColor}}{\thesection}{0.7em}{}
+\titlespacing*{\section}{0pt}{2.1ex plus 0.5ex minus 0.2ex}{0.7ex}
+\titleformat{\subsection}
+  {\large\bfseries\color{PrimaryColor}}{\thesubsection}{0.7em}{}
+\titlespacing*{\subsection}{0pt}{1.7ex plus 0.4ex minus 0.2ex}{0.5ex}
+
+% Shared box geometry keeps content blocks consistent and print-friendly.
+\tcbset{
+  studybox/.style={
+    enhanced,
+    breakable,
+    colframe=RuleColor,
+    boxrule=0.45pt,
+    arc=0.8mm,
+    left=2.5mm,
+    right=2.5mm,
+    top=1.8mm,
+    bottom=1.8mm,
+    before skip=0.75\baselineskip,
+    after skip=0.75\baselineskip,
+    fonttitle=\bfseries,
+    coltitle=PrimaryColor
+  },
+  definitionbox/.style={
+    studybox,
+    colback=LightBackground,
+    colframe=PrimaryColor!55,
+    title={Definition}
+  },
+  conceptbox/.style={
+    studybox,
+    colback=ConceptBackground,
+    colframe=PrimaryColor!50
+  },
+  notebox/.style={
+    studybox,
+    colback=LightBackground,
+    borderline west={1.2pt}{0pt}{PrimaryColor!75}
+  },
+  importantbox/.style={
+    studybox,
+    colback=ExamBackground,
+    colframe=PrimaryColor!70,
+    borderline west={1.4pt}{0pt}{PrimaryColor}
+  },
+  examplebox/.style={
+    studybox,
+    colback=white,
+    colframe=RuleColor,
+    borderline west={1.2pt}{0pt}{TextMuted}
+  },
+  summarybox/.style={
+    studybox,
+    colback=LightBackground,
+    colframe=PrimaryColor!55,
+    title={Chapter Summary}
+  }
+}
+
+% Listings use restrained colors and do not require shell escape.
+\lstdefinestyle{StudyCode}{
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{PrimaryColor}\bfseries,
+  commentstyle=\color{TextMuted}\itshape,
+  stringstyle=\color{PrimaryColor!75!black},
+  backgroundcolor=\color{LightBackground},
+  frame=single,
+  rulecolor=\color{RuleColor},
+  numbers=left,
+  numberstyle=\tiny\color{TextMuted},
+  numbersep=8pt,
+  breaklines=true,
+  breakatwhitespace=false,
+  keepspaces=true,
+  showstringspaces=false,
+  tabsize=4,
+  columns=fullflexible,
+  upquote=true,
+  captionpos=b
+}
+
+% Additional common web languages for listings.
+\lstdefinelanguage{JavaScript}{
+  keywords={async,await,break,case,catch,class,const,continue,debugger,default,delete,do,else,export,extends,false,finally,for,from,function,if,import,in,instanceof,let,new,null,of,return,static,super,switch,this,throw,true,try,typeof,var,void,while,yield},
+  sensitive=true,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]"
+}
+\lstdefinelanguage{TypeScript}{
+  keywords={abstract,any,as,async,await,boolean,break,case,catch,class,const,continue,default,delete,do,else,enum,export,extends,false,finally,for,from,function,if,implements,import,in,instanceof,interface,let,namespace,never,new,null,number,of,private,protected,public,readonly,return,static,string,super,switch,this,throw,true,try,type,typeof,undefined,var,void,while},
+  sensitive=true,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]"
+}
+\lstdefinelanguage{CSS}{
+  keywords={align-items,background,border,border-radius,color,display,flex,font,font-size,font-weight,grid,height,justify-content,margin,padding,position,transform,width},
+  sensitive=true,
+  comment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]"
+}
+\lstdefinelanguage{CSharp}{
+  morekeywords={abstract,as,base,bool,break,byte,case,catch,char,checked,class,const,continue,decimal,default,delegate,do,double,else,enum,event,explicit,extern,false,finally,fixed,float,for,foreach,goto,if,implicit,in,int,interface,internal,is,lock,long,namespace,new,null,object,operator,out,override,params,private,protected,public,readonly,ref,return,sbyte,sealed,short,sizeof,stackalloc,static,string,struct,switch,this,throw,true,try,typeof,uint,ulong,unchecked,unsafe,ushort,using,virtual,void,volatile,while,var},
+  sensitive=true,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]"
+}

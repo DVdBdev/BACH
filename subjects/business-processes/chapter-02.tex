@@ -1,0 +1,89 @@
+\chaptertopic{Process Architecture}
+
+\begin{learningobjectives}
+  \item Define process architecture.
+  \item Distinguish primary, management, and supporting processes.
+  \item Explain how a process architecture supports analysis.
+\end{learningobjectives}
+
+\section{Organizing Processes}
+
+A \term{process architecture} is an organized view of the processes in an
+enterprise and the relationships between them. It helps people see how work
+across teams contributes to organizational goals.
+
+\definition[def:process-architecture]{Process Architecture}{
+A structured overview of an organization's processes and their relationships.
+It may group processes into primary, management, and supporting categories.
+}
+
+\begin{center}
+  \begin{tabularx}{\textwidth}{@{}lYY@{}}
+    \toprule
+    Process type & Main purpose & Example \\
+    \midrule
+    Primary & Deliver value to customers & Fulfil a customer order \\
+    Management & Direct and monitor the organization & Set business goals \\
+    Supporting & Enable other processes & Maintain information systems \\
+    \bottomrule
+  \end{tabularx}
+\end{center}
+
+\keyconcept{End-to-end perspective}{
+A process architecture makes dependencies visible across departments. Analyze
+how the complete process delivers an outcome rather than optimizing each team
+in isolation.
+}
+
+\section{Representing a Workflow}
+
+Programming and technical subjects can use the same template. The code block
+below illustrates an order validation step.
+
+\begin{codeblock}{C\#}
+public class Order
+{
+    public int Id { get; set; }
+
+    public bool IsValid()
+    {
+        return Id > 0;
+    }
+}
+\end{codeblock}
+
+Other supported code languages include JavaScript, TypeScript, Python, SQL,
+HTML, CSS, and Bash. Use the spelling shown in the language name.
+
+\section{Revision Questions}
+
+\begin{questionlist}
+  \q{What is process architecture?}
+
+  \qa[q:primary-process]{What distinguishes a primary process from a
+  supporting process?}
+  {A primary process delivers value directly to customers; a supporting
+  process supplies capabilities or resources that enable other processes.}
+
+  \examqa{Explain how a process architecture can reveal opportunities for
+  improvement.}
+  {It makes relationships and handoffs visible, helping identify duplication,
+  bottlenecks, unclear responsibilities, and gaps between processes.}
+\end{questionlist}
+
+See Definition~\ref{def:process-architecture} and Question~
+\ref{q:primary-process} when reviewing the process categories.
+
+\important{
+A process category describes the role a process plays in the organization;
+it does not indicate that one category is inherently more important than
+another.
+}
+
+\begin{summarybox}
+\begin{itemize}
+  \item Process architecture organizes processes and shows their connections.
+  \item Primary processes deliver customer value.
+  \item Management and supporting processes enable effective delivery.
+\end{itemize}
+\end{summarybox}

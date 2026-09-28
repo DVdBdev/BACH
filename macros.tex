@@ -1,0 +1,159 @@
+% Public content API: metadata, structure, and reusable study-note blocks.
+\makeatletter
+\newcommand{\StudySubject}{}
+\newcommand{\StudyCode}{}
+\newcommand{\StudyYear}{}
+\newcommand{\StudyAuthor}{}
+\newcommand{\subject}[1]{\gdef\StudySubject{#1}}
+\newcommand{\subjectcode}[1]{\gdef\StudyCode{#1}}
+\newcommand{\academicyear}[1]{\gdef\StudyYear{#1}}
+\newcommand{\authorname}[1]{\gdef\StudyAuthor{#1}}
+
+% Minimal title page; optional metadata rows disappear when left empty.
+\newcommand{\makestudytitlepage}{%
+  \begin{titlepage}
+    \thispagestyle{empty}
+    \vspace*{0.19\textheight}
+    {\color{PrimaryColor}\rule{\textwidth}{1.2pt}}\par
+    \vspace{1.3cm}
+    {\Huge\bfseries\color{PrimaryColor}\StudySubject\par}
+    \vspace{0.35cm}
+    {\Large Study Notes\par}
+    \ifx\StudyCode\@empty\else
+      \vspace{0.35cm}{\large\StudyCode\par}
+    \fi
+    \ifx\StudyYear\@empty\else
+      \vspace{0.2cm}{\large Academic Year \StudyYear\par}
+    \fi
+    \vfill
+    \ifx\StudyAuthor\@empty\else
+      {\large\StudyAuthor\par}
+    \fi
+    \vspace*{1.1cm}
+    {\color{PrimaryColor}\rule{\textwidth}{0.5pt}}\par
+  \end{titlepage}%
+}
+
+% Numbered chapter heading; using refstepcounter keeps section and question
+% counters chapter-aware without requiring manually entered chapter numbers.
+\newcommand{\chaptertopic}[1]{%
+  \clearpage
+  \refstepcounter{chapter}%
+  \setcounter{section}{0}%
+  \setcounter{subsection}{0}%
+  \markboth{\StudySubject}{Chapter \thechapter\ -- #1}%
+  \addcontentsline{toc}{chapter}{Chapter \thechapter\enspace #1}%
+  \thispagestyle{plain}%
+  {\color{PrimaryColor}\large\bfseries Chapter \thechapter\par}
+  \vspace{0.4em}
+  {\Huge\bfseries #1\par}
+  \vspace{0.7em}
+  {\color{RuleColor}\rule{\textwidth}{0.6pt}\par}
+  \vspace{1.2em}
+}
+
+% Chapter-scoped counters make labels and printed numbers agree (e.g. 2.3).
+\newcounter{studyquestion}[chapter]
+\renewcommand{\thestudyquestion}{\thechapter.\arabic{studyquestion}}
+\newcounter{studydefinition}[chapter]
+\renewcommand{\thestudydefinition}{\thechapter.\arabic{studydefinition}}
+
+% A definition box uses a shared style and accepts an optional label.
+\newtcolorbox{StudyDefinitionBox}[1]{
+  definitionbox,
+  title={Definition \thestudydefinition\quad #1}
+}
+\NewDocumentCommand{\definition}{o m +m}{%
+  \refstepcounter{studydefinition}%
+  \IfNoValueF{#1}{\label{#1}}%
+  \begin{StudyDefinitionBox}{#2}#3\end{StudyDefinitionBox}%
+}
+
+% Questions are list items and must be placed inside questionlist.
+% Optional labels use ordinary LaTeX references, e.g. \q[q:bpm]{...}.
+\newenvironment{questionlist}{%
+  \begin{list}{}{%
+    \setlength{\leftmargin}{3.7em}%
+    \setlength{\labelwidth}{3.3em}%
+    \setlength{\labelsep}{0.4em}%
+    \setlength{\itemsep}{0.7\baselineskip}%
+    \setlength{\parsep}{0.2\baselineskip}%
+    \setlength{\topsep}{0.5\baselineskip}%
+    \setlength{\listparindent}{0pt}%
+  }%
+}{\end{list}}
+\NewDocumentCommand{\q}{o +m}{%
+  \refstepcounter{studyquestion}%
+  \item[\textbf{\color{PrimaryColor}Q\thestudyquestion.}]%
+  \IfNoValueF{#1}{\label{#1}}%
+  #2\par
+}
+\NewDocumentCommand{\answer}{+m}{%
+  \par\smallskip
+  {\small\color{TextMuted}\textbf{Answer:} #1\par}%
+  \smallskip
+}
+\NewDocumentCommand{\qa}{o +m +m}{%
+  \IfNoValueTF{#1}{\q{#2}}{\q[#1]{#2}}%
+  \answer{#3}%
+}
+\NewDocumentCommand{\examquestion}{o +m}{%
+  \refstepcounter{studyquestion}%
+  \item[\textbf{\color{PrimaryColor}Exam Q\thestudyquestion.}]%
+  \IfNoValueF{#1}{\label{#1}}%
+  \begin{tcolorbox}[
+    studybox,
+    colback=ExamBackground,
+    colframe=PrimaryColor!65,
+    borderline west={1.3pt}{0pt}{PrimaryColor},
+    before skip=0.35\baselineskip,
+    after skip=0.3\baselineskip
+  ]#2\end{tcolorbox}%
+}
+\NewDocumentCommand{\examqa}{o +m +m}{%
+  \IfNoValueTF{#1}{\examquestion{#2}}{\examquestion[#1]{#2}}%
+  \answer{#3}%
+}
+
+% Other reusable blocks share tcolorbox geometry, but have distinct roles.
+\NewDocumentCommand{\keyconcept}{m +m}{%
+  \begin{tcolorbox}[conceptbox,title={Key Concept\quad #1}]#2\end{tcolorbox}%
+}
+\NewDocumentCommand{\important}{+m}{%
+  \begin{tcolorbox}[importantbox,title={Important}]#1\end{tcolorbox}%
+}
+\NewDocumentCommand{\note}{+m}{%
+  \begin{tcolorbox}[notebox,title={Note}]#1\end{tcolorbox}%
+}
+\NewDocumentCommand{\example}{m +m}{%
+  \begin{tcolorbox}[examplebox,title={Example\quad #1}]#2\end{tcolorbox}%
+}
+\newcommand{\term}[1]{\textcolor{PrimaryColor}{\textbf{#1}}}
+\newtcolorbox{summarybox}{summarybox}
+\newenvironment{learningobjectives}{%
+  \begin{tcolorbox}[studybox,colback=LightBackground,colframe=RuleColor,title={Learning Objectives}]%
+  \begin{enumerate}[label=\textcolor{PrimaryColor}{\arabic*.},leftmargin=*]
+}{%
+  \end{enumerate}%
+  \end{tcolorbox}%
+}
+
+% Select the listings lexer by name. C# is entered as C\# in LaTeX source.
+\newcommand{\StudyCodeLanguage}[1]{%
+  \IfStrEqCase{#1}{%
+    {C\#}{\lstset{language=CSharp}}%
+    {CSharp}{\lstset{language=CSharp}}%
+    {JavaScript}{\lstset{language=JavaScript}}%
+    {TypeScript}{\lstset{language=TypeScript}}%
+    {Python}{\lstset{language=Python}}%
+    {SQL}{\lstset{language=SQL}}%
+    {HTML}{\lstset{language=HTML}}%
+    {CSS}{\lstset{language=CSS}}%
+    {Bash}{\lstset{language=bash}}%
+  }[\lstset{language=#1}]%
+}
+\lstnewenvironment{codeblock}[1]{%
+  \lstset{style=StudyCode}%
+  \StudyCodeLanguage{#1}%
+}{}
+\makeatother
