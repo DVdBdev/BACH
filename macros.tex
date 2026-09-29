@@ -61,7 +61,7 @@
 % A definition box uses a shared style and accepts an optional label.
 \newtcolorbox{StudyDefinitionBox}[1]{
   definitionbox,
-  title={Definition \thestudydefinition\quad #1}
+  title={#1}
 }
 \NewDocumentCommand{\definition}{o m +m}{%
   \refstepcounter{studydefinition}%
